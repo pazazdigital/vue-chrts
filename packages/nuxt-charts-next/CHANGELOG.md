@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.0](https://github.com/dennisadriaans/vue-chrts/compare/nuxt-charts@3.0.0...nuxt-charts@3.1.0) (2026-10-02)
+
+- Add DottedMap and TopoJSONMap with built-in geography, zoom, pins, routes, and heatmaps.
+- Add spec-driven DataChart and metric analytics.
+- Improve y-axis sizing.
+
 ## [3.0.0](https://github.com/dennisadriaans/vue-chrts/compare/nuxt-charts@3.0.0-beta.4...nuxt-charts@3.0.0) (2026-09-11)
 
 ### Features

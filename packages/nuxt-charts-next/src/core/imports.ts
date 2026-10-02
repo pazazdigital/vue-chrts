@@ -60,7 +60,37 @@ export const resolveImports = (config: ModuleOptions, resolverUrl: string) => {
       "TooltipRoundness",
       "RadarVariant",
       "RadialVariant",
+      "DottedMapProps",
+      "TopoJSONMapProps",
+      "MapsData",
+      "MapData",
+      "MapArea",
+      "MapFeature",
+      "MapPoint",
+      "MapLink",
+      "MapPin",
+      "MapDot",
+      "MapRegion",
+      "MapRegionName",
+      "MapGeometry",
+      "MapProjection",
+      "MapProjectionName",
+      "MapLegendItem",
+      "MapZoom",
+      "MapAccessor",
+      "MapInteractionKind",
+      "MapBaseProps",
+      "MapMarkSlot",
+      "MapOverlaySlot",
+      "MapTooltipSlot",
+      "DottedMapTooltipSlot",
+      "PrecomputedMap",
     ],
+  });
+
+  addImportsSources({
+    from: resolve("./runtime/utils/dottedMap"),
+    imports: ["getMap", "getPin"],
   });
 
   // The data layer. `ChartSpec` and friends are types, but the transform and

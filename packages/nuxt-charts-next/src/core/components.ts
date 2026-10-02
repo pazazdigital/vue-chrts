@@ -14,6 +14,8 @@ const COMPONENTS = {
   SankeyChart: "SankeyChart",
   CandlestickChart: "CandlestickChart",
   StatusTrackerChart: "StatusTrackerChart",
+  DottedMap: "DottedMap",
+  TopoJSONMap: "TopoJSONMap",
   // Data-aware primitive: renders a serializable `ChartSpec` over raw rows by
   // delegating to the adapters above.
   DataChart: "DataChart",
@@ -24,9 +26,10 @@ export type ComponentName = keyof typeof COMPONENTS;
 /**
  * Register the adapter components with Nuxt.
  *
- * Registered `mode: "client"` because `vccs` measures the DOM
+ * vccs charts register with `mode: "client"` because they measure the DOM
  * (`ResponsiveContainer`) and is not SSR-renderable; client-only avoids a
- * hydration mismatch and matches the v2 module's behaviour.
+ * hydration mismatch and matches the v2 module's behaviour. Geographic charts
+ * render SVG on the server and attach resize/zoom behaviour after mounting.
  */
 export const resolveComponents = (config: ModuleOptions, resolverUrl: string) => {
   const { prefix, include, global } = config;
@@ -40,7 +43,7 @@ export const resolveComponents = (config: ModuleOptions, resolverUrl: string) =>
     addComponent({
       name: `${prefix}${name}`,
       filePath: resolve(`./runtime/components/${COMPONENTS[name]}.vue`),
-      mode: "client",
+      mode: name === "DottedMap" || name === "TopoJSONMap" ? "all" : "client",
       global,
     });
   }

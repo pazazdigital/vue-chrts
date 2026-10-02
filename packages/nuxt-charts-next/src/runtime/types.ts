@@ -6,6 +6,7 @@
  */
 export type * from "./types/shared";
 export type * from "./types/charts";
+export type * from "./types/maps";
 // The data layer's serializable chart description and its transform result.
 export type * from "./spec/types";
 export type { TransformResult } from "./spec/transform";

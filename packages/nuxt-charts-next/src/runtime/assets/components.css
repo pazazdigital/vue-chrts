@@ -569,3 +569,22 @@
   color: var(--vc-tick-color);
   font-size: var(--vc-legend-size);
 }
+/* Geographic charts share the existing tooltip, legend, and theme tokens. */
+@layer vue-chrts {
+  .vc-map { display: flex; gap: var(--vc-legend-inset); }
+  .vc-map__viewport { position: relative; width: 100%; overflow: hidden; }
+  .vc-map__svg { display: block; width: 100%; height: 100%; }
+  .vc-map__svg--zoomable { cursor: grab; touch-action: none; }
+  .vc-map__svg--zoomable:active { cursor: grabbing; }
+  .vc-map__svg:focus-visible { outline: 2px solid var(--vc-series-0); outline-offset: -2px; }
+  .vc-map__mark:focus-visible { outline: none; filter: brightness(1.25); }
+  .vc-map__mark:focus-visible > circle,
+  .vc-map__mark:focus-visible > path { stroke: var(--vc-axis-label-color); stroke-width: 2; }
+  .vc-map__label { fill: var(--vc-axis-label-color); font: var(--vc-tick-weight) var(--vc-tick-size) var(--vc-font-family); paint-order: stroke; stroke: var(--vc-surface-bg); stroke-width: 3px; pointer-events: none; }
+  .vc-map__tooltip { position: absolute; z-index: 2; pointer-events: none; max-width: min(280px, 90%); }
+  .vc-map__legend { display: flex; }
+  .vc-map__controls { position: absolute; right: 12px; bottom: 12px; display: flex; border: 1px solid var(--vc-tooltip-border); border-radius: var(--vc-tooltip-radius); background: var(--vc-surface-bg); }
+  .vc-map__controls button { width: 32px; height: 32px; border: 0; background: transparent; color: var(--vc-axis-label-color); font: inherit; cursor: pointer; }
+  .vc-map__controls button:hover { background: var(--vc-hover-fill); }
+  .vc-map__controls button:focus-visible { outline: 2px solid var(--vc-series-0); outline-offset: -2px; }
+}

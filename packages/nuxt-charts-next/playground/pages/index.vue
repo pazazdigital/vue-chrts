@@ -11,6 +11,7 @@ const charts = [
   { to: "/radialbar", label: "Radial bar chart" },
   { to: "/candlestick", label: "Candlestick chart" },
   { to: "/status-tracker", label: "Status tracker chart" },
+  { to: "/maps", label: "Maps — dotted, choropleth, routes, globe, and custom TopoJSON" },
   { to: "/variants", label: "Style variants — every treatment side by side" },
   { to: "/cards", label: "Cards — full-bleed hourly traffic dashboard" },
   { to: "/dots", label: "Dot-only charts — monochrome circle-built gallery" },

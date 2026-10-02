@@ -1,6 +1,6 @@
 # nuxt-charts
 
-Beautiful chart components for Nuxt — Area, Bar, Line, Donut, Bubble, Radar, Radial Bar, Funnel, Sankey, Candlestick and Status Tracker.
+Beautiful chart and map components for Nuxt — Area, Bar, Line, Donut, Bubble, Radar, Radial Bar, Funnel, Sankey, Candlestick, Status Tracker, Dotted Map, and TopoJSON Map.
 
 Powered by [vccs](https://vue-charts.com) (Vue port of Recharts). Drop-in config-prop API from nuxt-charts v2.
 
@@ -12,8 +12,8 @@ the same components work in any Nuxt project.
 ## Install
 
 ```bash
-# beta (v3)
-pnpm add nuxt-charts@beta
+# v3
+pnpm add nuxt-charts@next
 ```
 
 ```ts
@@ -37,6 +37,51 @@ export default defineNuxtConfig({
 | `SankeyChart` | New in v3 |
 | `CandlestickChart` | New in v3 |
 | `StatusTrackerChart` | New in v3 |
+| `DottedMap` | D3 dotted geography, pins, regional filters, and country colors |
+| `TopoJSONMap` | D3 choropleths, points, routes, projections, and heatmaps |
+
+### Maps
+
+Maps include world geometry and need no external data fetch or Unovis dependency:
+
+```vue
+<script setup lang="ts">
+const pins = [{ lat: 52.3676, lng: 4.9041, label: "Amsterdam" }];
+const data = {
+  areas: [{ id: "NLD", value: 94 }, { id: "USA", value: 91 }],
+  points: [
+    { id: "ams", latitude: 52.3676, longitude: 4.9041, label: "Amsterdam" },
+    { id: "nyc", latitude: 40.7128, longitude: -74.006, label: "New York" },
+  ],
+  links: [{ source: "ams", target: "nyc" }],
+};
+</script>
+
+<template>
+  <DottedMap :pins="pins" :height="360" :map-height="75" />
+  <TopoJSONMap :data="data" value="value" projection="equalEarth" show-point-labels />
+</template>
+```
+
+Use `topoJson`/`geoJson` for custom geography, `mapFeatureKey` to select a
+TopoJSON object, and `featureId` to match area IDs to a property. The bundled
+map accepts ISO alpha-2, alpha-3, and numeric country IDs. `areaColor`, point
+styles, and link styles accept values or typed accessor functions. Named
+projections, configured D3 projections, and projection factories are supported.
+
+Both components render SVG during SSR, resize to their containers, and share
+chart themes, tooltip/legend variants, loading/error states, and accessibility.
+Drag, pinch, double-click, and keyboard zoom work by default; `zoomOnScroll`
+enables wheel zoom and `showControls` adds zoom/reset buttons. Exposed methods:
+`zoomIn`, `zoomOut`, `zoomTo`, `resetView`; TopoJSONMap also exposes
+`fitToPoints` and `zoomToFeature`. `zoomOnClick` is opt-in.
+
+Slots provide typed tooltips, legends, SVG overlays, and custom marks
+(`pin`/`dot` or `feature`/`point`/`link`). `getMap` and `getPin` are
+auto-imported for precomputation and exported from `nuxt-charts/maps`.
+
+See [Dotted Map](https://nuxtcharts.com/docs/maps/dotted-map) and
+[TopoJSON Map](https://nuxtcharts.com/docs/maps/topojson-map) for the full API.
 
 ### New cross-cutting props (cartesian charts)
 
@@ -146,8 +191,7 @@ several charts on one page never collide.
 ### Deferred / removed
 
 - **`DualChart`** — planned for v3.1 (maps onto the `vccs` `ComposedChart`).
-- **`GanttChart`, `DagreGraph`, `Maps`** — removed in v3. They were Unovis /
-  d3-geo specific and have no `vccs` equivalent.
+- **`GanttChart`, `DagreGraph`** — removed in v3. They were Unovis-specific.
 
 ## Module options
 
@@ -212,13 +256,16 @@ with `--vc-*` variables (or the backwards-compatible `--chart-color-0` through
   `SankeyChartProps`, `SankeyInputNode`, `SankeyInputLink`,
   `StatusTrackerChartProps`, `StatusTrackerDatum`, `BulletLegendItemInterface`,
   `AxisConfig`, `ValueLabel`, `ReferenceLineConfig`, `NumericKeys`
+- Map types: `DottedMapProps`, `TopoJSONMapProps`, `MapData`, `MapArea`,
+  `MapFeature`, `MapPoint`, `MapLink`, `MapPin`, `MapDot`, `MapGeometry`,
+  `MapProjection`, `MapRegion`, `MapZoom`, `PrecomputedMap`
 - Style variant unions: `BarVariant`, `AreaFillVariant`, `StrokeVariant`,
   `DotVariant`, `DitherVariant`, `BackgroundVariant`, `LegendIndicatorVariant`,
   `TooltipVariant`, `TooltipRoundness`, `RadarVariant`, `RadialVariant`
 
 ## Migrating from v2
 
-See the [Upgrade to v3](https://nuxtcharts.com/docs/getting-started/upgrade-to-v3) guide. Specialty charts (maps, gantt, dual, dagre) are not in v3 yet — stay on `nuxt-charts@2` if you need them.
+See the [Upgrade to v3](https://nuxtcharts.com/docs/getting-started/upgrade-to-v3) guide. Maps now use D3 and include world geometry. Gantt, dual, and dagre charts remain deferred or removed.
 
 ## License
 

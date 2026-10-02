@@ -397,7 +397,7 @@ defineSlots<{
       :height="height"
       :locale="locale"
       :stacked="stacked"
-      :hide-legend="hideLegend ?? !compare && !series"
+      :hide-legend="hideLegend ?? (!compare && !series)"
       :theme="theme"
       :value-formatter="formatValue"
       :loading="loading"

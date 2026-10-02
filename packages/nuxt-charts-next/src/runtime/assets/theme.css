@@ -28,6 +28,9 @@
   }
 
   .vue-chrts {
+    --vc-map-feature-color: var(--ui-bg-accented, var(--vc-grid-color));
+    --vc-map-boundary-color: var(--ui-border-accented, var(--vc-surface-bg));
+    --vc-map-dot-color: var(--ui-text-dimmed, var(--vc-tick-color));
     /* ---- host design-system bridge ----
        Nuxt UI v4 is the preferred zero-config integration. Each value still
        falls through to the legacy chart palette and finally a standalone

@@ -1,7 +1,7 @@
 {
   "name": "nuxt-charts",
-  "version": "3.0.0",
-  "description": "Beautiful chart components for Nuxt (vccs engine) \u2014 Area, Bar, Line, Donut, Bubble, Radar, Radial Bar, Funnel, Sankey, Candlestick, Status Tracker",
+  "version": "3.1.0",
+  "description": "Beautiful chart and D3 map components for Nuxt — Area, Bar, Line, Donut, Bubble, Radar, Radial Bar, Funnel, Sankey, Candlestick, Status Tracker, Dotted Map, TopoJSON Map",
   "license": "MIT",
   "author": "Dennis Adriaansen <adriaansendennis@gmail.com>",
   "homepage": "https://nuxtcharts.com",
@@ -44,6 +44,11 @@
       "types": "./dist/runtime/spec/index.d.ts",
       "import": "./dist/runtime/spec/index.js",
       "default": "./dist/runtime/spec/index.js"
+    },
+    "./maps": {
+      "types": "./dist/runtime/maps.d.ts",
+      "import": "./dist/runtime/maps.js",
+      "default": "./dist/runtime/maps.js"
     }
   },
   "main": "./dist/module.mjs",
@@ -66,7 +71,14 @@
     "release:dry": "node ../../tools/release.mjs --package nuxt-charts --dry-run"
   },
   "dependencies": {
+    "@types/d3-geo": "^3.1.0",
+    "@types/geojson": "^7946.0.16",
+    "@types/topojson-specification": "^1.0.5",
+    "d3-geo": "^3.1.1",
+    "d3-selection": "^3.0.0",
+    "d3-zoom": "^3.0.0",
     "motion-v": "^2.3.0",
+    "topojson-client": "^3.1.0",
     "vccs": "^0.5.0"
   },
   "devDependencies": {
@@ -78,7 +90,10 @@
     "@nuxt/schema": "^4.3.0",
     "@nuxt/test-utils": "^4.2.0",
     "@tailwindcss/vite": "^4.2.2",
+    "@types/d3-selection": "^3.0.11",
+    "@types/d3-zoom": "^3.0.8",
     "@types/node": "latest",
+    "@types/topojson-client": "^3.1.5",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/test-utils": "^2.4.11",
     "eslint": "^9.39.2",
@@ -93,6 +108,6 @@
   "packageManager": "pnpm@10.33.0",
   "publishConfig": {
     "access": "public",
-    "tag": "beta"
+    "tag": "next"
   }
 }
